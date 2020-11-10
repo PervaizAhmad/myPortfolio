@@ -1,0 +1,46 @@
+.formContainer {
+    width: 50%;
+    margin: auto;
+    margin-top: 5%;
+}
+
+#course {
+    height: 50px;
+}
+
+.title {
+    font-weight: 900;
+    color: rgb(80, 80, 80);
+}
+
+.subtitle {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.base-grey {
+    background-color: #f7f7f7;
+}
+
+.section {
+    border-top: 1px solid #d3d3d3;
+    border-bottom: 1px solid #d3d3d3;
+    background-color: #ffffff;
+}
+
+.has-error {
+    color: rgb(211, 38, 38);
+}
+
+.has-error input {
+    border: 1px solid rgb(211, 38, 38);
+}
+
+.gap-full { margin: 1em; }
+.gap-not-top { margin: 0em 1em 1em 1em; }
+.gap-top { margin-top: 1em; }
+
+.add {
+    margin: auto;
+    margin-left: 1em;
+}

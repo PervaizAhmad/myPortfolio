@@ -1,0 +1,220 @@
+<div class="formContainer">
+  <form [formGroup]="gradesCalculatorForm" (ngSubmit)="onSubmit()">
+    <div class="form-group row">
+      <label for="course" class="col-4 col-form-label"><h1 class="title">Course</h1></label> 
+      <div class="col-8">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <i class="fa fa-graduation-cap"></i>
+            </div>
+          </div> 
+          <input id="course" name="course" formControlName="courseName" placeholder="ex. Computer Science" type="text" class="form-control"> 
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-4"><h2 class="title">Target Grade</h2></label> 
+      <div class="col-8">
+        <div class="custom-control custom-radio custom-control-inline">
+          <input name="targetGrade" id="targetGrade_0" formControlName="targetGrade" type="radio" required="required" class="custom-control-input" value="first"> 
+          <label for="targetGrade_0" class="custom-control-label">1st</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+          <input name="targetGrade" id="targetGrade_1" formControlName="targetGrade" type="radio" required="required" class="custom-control-input" value="twoOne"> 
+          <label for="targetGrade_1" class="custom-control-label">2:1</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+          <input name="targetGrade" id="targetGrade_2" formControlName="targetGrade" type="radio" required="required" class="custom-control-input" value="twoTwo"> 
+          <label for="targetGrade_2" class="custom-control-label">2:2</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+          <input name="targetGrade" id="targetGrade_3" formControlName="targetGrade" type="radio" required="required" class="custom-control-input" value="third"> 
+          <label for="targetGrade_3" class="custom-control-label">3</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-4"><h2 class="title">Year</h2></label> 
+      <div class="col-8">
+        <div class="custom-control custom-radio custom-control-inline">
+          <input name="year" id="year_0" formControlName="year" type="radio" class="custom-control-input" value="firstYear" required="required"> 
+          <label for="year_0" class="custom-control-label">1st</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+          <input name="year" id="year_1" formControlName="year" type="radio" class="custom-control-input" value="secondYear" required="required"> 
+          <label for="year_1" class="custom-control-label">2nd</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+          <input name="year" id="year_2" formControlName="year" type="radio" class="custom-control-input" value="finalYear" required="required"> 
+          <label for="year_2" class="custom-control-label">Final</label>
+        </div>
+      </div>
+    </div>
+    <!-- ~~~~~~~~~~~ M O D U L E ~~~~~~~~~~~ -->
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <div formArrayName="modules" *ngFor="let module of getFormModules.controls; let i = index">
+      <div class="card base-grey" [formGroupName]="i" style="margin-top: 1em;">
+        <div class="form-group row gap-full">
+          <label for="module" class="col-4 col-form-label subtitle">Module</label> 
+          <div class="col-8">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <i class="fa fa-folder-open"></i>
+                </div>
+              </div> 
+              <input id="module" name="module" formControlName="moduleName" placeholder="ex. Programming" type="text" class="form-control" required="required">
+            </div>
+          </div>
+        </div>
+        <!-- Assessment -->
+        <div class="section">
+          <div class="form-group row gap-full">
+            <label for="assess" class="col-4 col-form-label">Assessment</label> 
+            <div class="col-8">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fa fa-pencil"></i>
+                  </div>
+                </div>
+                <input id="assess" name="assess" formControlName="assess" placeholder="ex. Java Exam" type="text" class="form-control" required="required">
+              </div>
+            </div>
+          </div>
+          <div class="form-group row gap-full">
+            <label for="grade" class="col-4 col-form-label">Grading</label>
+            <div class="col-8">
+              <div class="input-group"> <!-- Grade % Weight -->
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    Grade &nbsp;
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-sort-numeric-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M4 14a.5.5 0 0 0 .5-.5v-11a.5.5 0 0 0-1 0v11a.5.5 0 0 0 .5.5z"/>
+                      <path fill-rule="evenodd" d="M6.354 4.854a.5.5 0 0 0 0-.708l-2-2a.5.5 0 0 0-.708 0l-2 2a.5.5 0 1 0 .708.708L4 3.207l1.646 1.647a.5.5 0 0 0 .708 0z"/>
+                      <path d="M12.438 7V1.668H11.39l-1.262.906v.969l1.21-.86h.052V7h1.046zm-2.84 5.82c.054.621.625 1.278 1.761 1.278 1.422 0 2.145-.98 2.145-2.848 0-2.05-.973-2.688-2.063-2.688-1.125 0-1.972.688-1.972 1.836 0 1.145.808 1.758 1.719 1.758.69 0 1.113-.351 1.261-.742h.059c.031 1.027-.309 1.856-1.133 1.856-.43 0-.715-.227-.773-.45H9.598zm2.757-2.43c0 .637-.43.973-.933.973-.516 0-.934-.34-.934-.98 0-.625.407-1 .926-1 .543 0 .941.375.941 1.008z"/>
+                    </svg>
+                  </div>
+                </div>
+                <input id="grade" name="grade" formControlName="grade" placeholder="ex. 75" type="number" class="form-control">
+                <div class="input-group-append">
+                  <div class="input-group-text">%</div>
+                </div>
+                
+                <div class="input-group-prepend" style="margin-left: 1em;">
+                  <div class="input-group-text">Weight &nbsp;<i class="fa fa-balance-scale"></i></div>
+                </div>
+                <input id="weight" name="weight" formControlName="weight" placeholder="ex. 75" type="number" class="form-control" required="required">
+                <div class="input-group-append">
+                  <div class="input-group-text">%</div>
+                </div>
+              </div> <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+              <span id="gradeHelpBlock" class="form-text text-muted">If grade not yet received, leave the Grade field empty</span>
+            </div>
+          </div>
+        </div>
+        <!-- Assessment -->
+        <button type="button" class="btn btn-outline-success add" style="margin: 1em;" (click)="addAssessment()">
+          <i class="fa fa-plus" aria-hidden="true"></i> Add Assessment
+        </button>
+      </div>
+    </div>
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <!-- ~~~~~~~~~~~ M O D U L E ~~~~~~~~~~~ -->
+    <button type="button" class="btn btn-outline-success" style="margin: 1em; float: left;" (click)="addModule()">
+      <i class="fa fa-plus" aria-hidden="true"></i> Add Module
+    </button>
+    <button name="submit" type="submit" class="btn btn-primary" style="margin: 1em; float: right;">
+      <i class="fa fa-bar-chart"></i> Generate Report
+    </button>
+    <button type="button" class="btn btn-outline-primary" style="margin: 1em; float: right;" (click)="onLoadData()">
+      Load Data
+    </button>
+    <button type="button" class="btn btn-outline-success" style="margin: 1em; float: right;" (click)="onSaveData()">
+      Save Data
+    </button>
+  </form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- <table border="1" style="clear: both; margin: auto;">
+  <tr>
+    <th style="padding: 10px; background-color: rgb(209, 208, 208);">formControlName</th>
+    <th style="padding: 10px; background-color: rgb(209, 208, 208);">touched</th>
+    <th style="padding: 10px; background-color: rgb(209, 208, 208);">dirty</th>
+    <th style="padding: 10px; background-color: rgb(209, 208, 208);">valid</th>
+    <th style="padding: 10px; background-color: rgb(209, 208, 208);">value</th>
+  </tr> -->
+  <!-- <tr style="background-color: rgb(218, 218, 218);">
+    <td style="padding: 10px;">FormGroup</td>
+    <td style="padding: 10px;">{{ gradesCalculatorForm.touched }}</td>
+    <td style="padding: 10px;">{{ gradesCalculatorForm.dirty }}</td>
+    <td style="padding: 10px;">{{ gradesCalculatorForm.valid }}</td>
+    <td style="padding: 10px;">{{ gradesCalculatorForm.value | json }}</td>
+  </tr> -->
+  <!-- <tr>
+    <td style="padding: 10px; background-color: rgb(209, 208, 208);">course</td>
+    <td style="padding: 10px;">{{ gradesCalculatorForm.get('courseName').touched }}</td>
+    <td style="padding: 10px;">{{ gradesCalculatorForm.get('courseName').dirty }}</td>
+    <td style="padding: 10px;">{{ gradesCalculatorForm.get('courseName').valid }}</td>
+    <td style="padding: 10px;">{{ gradesCalculatorForm.get('courseName').value | json }}</td>
+  </tr>
+  <tr>
+    <td style="padding: 10px; background-color: rgb(209, 208, 208);">targetGrade</td>
+    <td style="padding: 10px;">{{ gradesCalculatorForm.get('targetGrade').touched }}</td>
+    <td style="padding: 10px;">{{ gradesCalculatorForm.get('targetGrade').dirty }}</td>
+    <td style="padding: 10px;">{{ gradesCalculatorForm.get('targetGrade').valid }}</td>
+    <td style="padding: 10px;">{{ gradesCalculatorForm.get('targetGrade').value | json }}</td>
+  </tr>
+  <tr>
+    <td style="padding: 10px; background-color: rgb(209, 208, 208);">year</td>
+    <td style="padding: 10px;">{{ gradesCalculatorForm.get('year').touched }}</td>
+    <td style="padding: 10px;">{{ gradesCalculatorForm.get('year').dirty }}</td>
+    <td style="padding: 10px;">{{ gradesCalculatorForm.get('year').valid }}</td>
+    <td style="padding: 10px;">{{ gradesCalculatorForm.get('year').value | json }}</td>
+  </tr>
+  <tr>
+    <td style="padding: 10px; background-color: rgb(209, 208, 208);">module</td>
+    <td style="padding: 10px;">{{ gradesCalculatorForm.get('moduleName').touched }}</td>
+    <td style="padding: 10px;">{{ gradesCalculatorForm.get('moduleName').dirty }}</td>
+    <td style="padding: 10px;">{{ gradesCalculatorForm.get('moduleName').valid }}</td>
+    <td style="padding: 10px;">{{ gradesCalculatorForm.get('moduleName').value | json }}</td>
+  </tr>
+  <tr>
+    <td style="padding: 10px; background-color: rgb(209, 208, 208);">assess</td>
+    <td style="padding: 10px;">{{ gradesCalculatorForm.get('assess').touched }}</td>
+    <td style="padding: 10px;">{{ gradesCalculatorForm.get('assess').dirty }}</td>
+    <td style="padding: 10px;">{{ gradesCalculatorForm.get('assess').valid }}</td>
+    <td style="padding: 10px;">{{ gradesCalculatorForm.get('assess').value | json }}</td>
+  </tr>
+  <tr>
+    <td style="padding: 10px; background-color: rgb(209, 208, 208);">grade</td>
+    <td style="padding: 10px;">{{ gradesCalculatorForm.get('grade').touched }}</td>
+    <td style="padding: 10px;">{{ gradesCalculatorForm.get('grade').dirty }}</td>
+    <td style="padding: 10px;">{{ gradesCalculatorForm.get('grade').valid }}</td>
+    <td style="padding: 10px;">{{ gradesCalculatorForm.get('grade').value | json }}</td>
+  </tr>
+  <tr>
+    <td style="padding: 10px; background-color: rgb(209, 208, 208);">weight</td>
+    <td style="padding: 10px;">{{ gradesCalculatorForm.get('weight').touched }}</td>
+    <td style="padding: 10px;">{{ gradesCalculatorForm.get('weight').dirty }}</td>
+    <td style="padding: 10px;">{{ gradesCalculatorForm.get('weight').valid }}</td>
+    <td style="padding: 10px;">{{ gradesCalculatorForm.get('weight').value | json }}</td>
+  </tr>
+</table> -->
+
+<table border="1" style="clear: both; margin: auto;">
+  <tr>
+    <td>{{ gradesCalculatorForm.value | json }}</td>
+  </tr>
+</table>
